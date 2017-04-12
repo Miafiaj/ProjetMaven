@@ -1,7 +1,9 @@
 package jrouxel;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 
 import com.opencsv.CSVReader;
 
@@ -12,6 +14,7 @@ import com.opencsv.CSVReader;
 public class App
 {
     private static CSVReader reader;
+	private static List<String> liste;
 
 	public static int max(int a, int b)
     {
@@ -26,21 +29,27 @@ public class App
     	int monmax=0;
     	String nb;
         int temp;
+        //Vector<String> out = new Vector<String>(); Question 27 et plus, pas eu le temps de traiter
     	try 
     	{
 			reader = new CSVReader(new FileReader("data.csv"),',');
 			List<String[]>myEntries=reader.readAll();
-			String[] test;
-       		test=myEntries.get(0);
-	       	//parcourt
-	       	for (int i  = 0; i<test.length; i++)
-	       	{
-	       		nb=test[i];
-	       		System.out.println("Nombre lu : " + nb);
-	       		temp=Integer.parseInt(nb);
-	       		if (max(monmax,temp)!=monmax)
+			String[] test = null;
+			for (int i =0; i<myEntries.size(); i++)
+			{
+	       		test=myEntries.get(i);
+	       		//liste = Arrays.asList(test); Question 27 et plus, pas eu le temps de traiter
+	       		//CollectionUtils.select(liste,new MonPredicat<String>(),out); Question 27 et plus, pas eu le temps de traiter
+	       		//parcourt
+	       		for (int j  = 0; j<test.length; j++)
 	       		{
-	       			monmax=temp;
+	       			nb=test[j];
+	       			System.out.println("Nombre lu : " + nb);
+	       			temp=Integer.parseInt(nb);
+	       			if (max(monmax,temp)!=monmax)
+	       			{
+	       				monmax=temp;
+	       			}
 	       		}
 	       	}
 	       	System.out.println("Max :" + monmax);
