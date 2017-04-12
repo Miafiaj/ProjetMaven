@@ -1,10 +1,8 @@
 package jrouxel;
 
-import java.util.*;
 import java.io.*;
-import java.awt.List;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.util.List;
+
 import com.opencsv.CSVReader;
 
 /**
@@ -13,13 +11,15 @@ import com.opencsv.CSVReader;
  */
 public class App
 {
-    public static int max(int a, int b)
+    private static CSVReader reader;
+
+	public static int max(int a, int b)
     {
     	return a > b ? a:b;
     	//return a;
     }
     
-    public static void main( String[] args )
+    public static void main( String[] args ) throws IOException
     {
     	//int result = max(4,5);
         //System.out.println( "Max :" + result );
@@ -28,14 +28,15 @@ public class App
         int temp;
     	try 
     	{
-			CSVReader reader = new CSVReader(new FileReader("data.csv"),',');
-			List<String[]> myEntries = reader.readAll();
+			reader = new CSVReader(new FileReader("data.csv"),',');
+			List<String[]>myEntries=reader.readAll();
 			String[] test;
+       		test=myEntries.get(0);
 	       	//parcourt
-	       	for (int i  = 0; i<myEntries.size(); i++)
+	       	for (int i  = 0; i<test.length; i++)
 	       	{
-	       		test=myEntries.get(i);
-	       		nb=test[0];
+	       		nb=test[i];
+	       		System.out.println("Nombre lu : " + nb);
 	       		temp=Integer.parseInt(nb);
 	       		if (max(monmax,temp)!=monmax)
 	       		{
